@@ -8,7 +8,7 @@ class Article(Base):
     featured = Column(Boolean, default=False)
     title = Column(String)
     url = Column(String)
-    urlImage = Column(String)
+    imageUrl = Column(String)
     newsSite = Column(String)
     summmary = Column(String)
     publishedAt = Column(String)

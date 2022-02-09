@@ -1,6 +1,6 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
-from pydantic import BaseModel
+
 
 from database import SessionLocal, engine
 import models, schemas
@@ -33,20 +33,20 @@ def get_Articles(skip: int = 0, limit: int = 3, db: Session = Depends(get_db)):
     Obtém todos os artigos
     """
     articles = get_articles(db, skip=skip, limit=limit)
-
+    return articles
 
 @app.get("/articles/{id}", response_model=schemas.Article)
 def get_ArticlesById(id: int, db: Session = Depends(get_db)):
     """
     Obtém um artigo passando o id
     """
-    db_article = get_article_by_id(db, id=article_id)
+    db_article = get_article_by_id(db, id=id)
     if db_article is None:
         raise HTTPException(status_code=404, detail="Artigo não  encontrado")
     return db_article
 
 
-@app.post("/articles/", response_model=list[schemas.Article])
+@app.post("/articles/", response_model=schemas.Article)
 def create_Articles(article: schemas.ArticleCreate, db: Session = Depends(get_db)):
     """Cria um artigo"""
     # db_article = CRUD.get_article_by_id(db, article=article_id)

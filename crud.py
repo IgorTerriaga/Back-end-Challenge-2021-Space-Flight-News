@@ -3,8 +3,8 @@ from sqlalchemy.orm import Session
 import models, schemas
 
 
-def get_article_by_id(db: Session, article_id: int):
-    return db.query(models.Article).filter(models.Article.id == article_id).first()
+def get_article_by_id(db: Session, id: int):
+    return db.query(models.Article).filter(models.Article.id == id).first()
 
 
 def get_articles(db: Session, skip: int = 0, limit: int = 3):
@@ -16,7 +16,7 @@ def create_article(db: Session, article: schemas.ArticleCreate):
         featured=article.featured,
         title=article.title,
         url=article.url,
-        urlImage=article.urlImage,
+        imageUrl=article.imageUrl,
         newsSite=article.newsSite,
         summmary=article.summary,
         publishedAt=article.publishedAt,
