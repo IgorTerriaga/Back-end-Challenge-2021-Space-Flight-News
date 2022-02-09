@@ -14,5 +14,5 @@ def test_welcome_code():
 def test_welcome_response():
     response = client.get("/")
     assert response.json() == {
-        "message": "Back-end Challenge 2021 🏅 - Space Flight News"
+        "menssagem": "Back-end Challenge 2021 🏅 - Space Flight News"
     }
