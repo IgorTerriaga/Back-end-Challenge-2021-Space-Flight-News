@@ -14,9 +14,10 @@ def get_article_by_id(db: Session, id: int):
 
 def get_articles(db: Session, skip: int = 0, limit: int = 3):
     articles =  db.query(models.Article).offset(skip).limit(limit).all()
-    for article in articles:
-        article.events
-        article.launches
+    for e in articles:
+        e.events
+        e.launches
+    
     return articles
 
 

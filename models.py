@@ -23,7 +23,6 @@ class Launche(Base):
     id = Column(String, primary_key=True, index=True)
     provider = Column(String)
     article_id = Column(Integer, ForeignKey("articles.id"))
-
     article = relationship("Article", back_populates="launches")
 
 
@@ -32,5 +31,4 @@ class Event(Base):
     id = Column(String, primary_key=True, index=True)
     provider = Column(String)
     article_id = Column(Integer, ForeignKey("articles.id"))
-
     article = relationship("Article", back_populates="events")
