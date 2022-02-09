@@ -1,14 +1,23 @@
+from cmath import log
+from django.http import HttpResponse
 from sqlalchemy.orm import Session
-
 import models, schemas
 
 
 def get_article_by_id(db: Session, id: int):
-    return db.query(models.Article).filter(models.Article.id == id).first()
+    articles =  db.query(models.Article).filter(models.Article.id == id).first()
+    articles.events
+    articles.launches
+    return articles
+
 
 
 def get_articles(db: Session, skip: int = 0, limit: int = 3):
-    return db.query(models.Article).offset(skip).limit(limit).all()
+    articles =  db.query(models.Article).offset(skip).limit(limit).all()
+    for article in articles:
+        article.events
+        article.launches
+    return articles
 
 
 def create_article(db: Session, article: schemas.ArticleCreate):
@@ -18,10 +27,31 @@ def create_article(db: Session, article: schemas.ArticleCreate):
         url=article.url,
         imageUrl=article.imageUrl,
         newsSite=article.newsSite,
-        summmary=article.summary,
+        summary=article.summary,
         publishedAt=article.publishedAt,
     )
     db.add(db_article)
     db.commit()
     db.refresh(db_article)
     return db_article
+
+
+def update_article(db: Session, db_article, article):
+    db_article.title = article.title
+    db_article.featured = article.featured
+    db_article.url = article.url
+    db_article.imageUrl = article.imageUrl
+    db_article.newsSite = article.newsSite
+    db_article.summary = article.summary
+    db_article.publishedAt = article.publishedAt
+
+    db.commit()
+    db.refresh(db_article)
+    return db_article
+
+def delete_article(db:Session, id:int):
+    db_article = db.query(models.Article).filter(models.Article.id == id).first()
+    db.delete(db_article)
+    db.commit()
+    return {"detail": "Ok"}
+

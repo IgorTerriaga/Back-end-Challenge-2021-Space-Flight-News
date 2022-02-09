@@ -1,4 +1,4 @@
-from sqlalchemy import Table, Boolean, Column, ForeignKey, Integer, String
+from sqlalchemy import  Boolean, Column, ForeignKey, Integer, String
 from database import Base
 from sqlalchemy.orm import relationship
 
@@ -11,7 +11,7 @@ class Article(Base):
     url = Column(String)
     imageUrl = Column(String)
     newsSite = Column(String)
-    summmary = Column(String)
+    summary = Column(String)
     publishedAt = Column(String)
 
     launches = relationship("Launche", back_populates="article")
