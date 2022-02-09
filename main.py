@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Depends, HTTPException
-from fastapi_pagination import Page, add_pagination, paginate
+
 from sqlalchemy.orm import Session
 from typing import List
 
@@ -28,7 +28,7 @@ def welcome():
     return {"menssagem": "Back-end Challenge 2021 🏅 - Space Flight News"}
 
 
-@app.get("/articles/",)
+@app.get("/articles",)
 def get_Articles(skip: int = 0, limit: int = 3, db: Session = Depends(get_db)):
     """
     Obtém todos os artigos
