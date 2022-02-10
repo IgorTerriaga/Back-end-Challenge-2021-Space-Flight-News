@@ -3,7 +3,6 @@ from fastapi import FastAPI, Depends, HTTPException
 from database import SessionLocal, engine
 from sqlalchemy.orm import Session
 from crud import get_article_by_id, get_articles, create_article, update_article, delete_article
-from cron import work
 
 models.Base.metadata.create_all(bind=engine)
 app = FastAPI()

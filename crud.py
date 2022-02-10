@@ -1,7 +1,7 @@
+import models, schemas
 from cmath import log
 from django.http import HttpResponse
 from sqlalchemy.orm import Session
-import models, schemas
 
 
 def get_article_by_id(db: Session, id: int):
