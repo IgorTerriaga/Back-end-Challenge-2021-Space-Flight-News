@@ -17,4 +17,4 @@ Diferencial 2 Configurar um sistema de alerta se houver algum falha durante a si
 
 Diferencial 3 Descrever a documentação da API utilizando o conceito de Open API 3.0; - Concluído
 
-Diferencial 4 Escrever Unit Tests para os endpoints da API;
+Diferencial 4 Escrever Unit Tests para os endpoints da API; - Finalizado
