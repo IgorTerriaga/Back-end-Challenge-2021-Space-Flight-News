@@ -5,19 +5,22 @@ import models, schemas
 
 
 def get_article_by_id(db: Session, id: int):
-    articles =  db.query(models.Article).filter(models.Article.id == id).first()
+    articles = db.query(models.Article).filter(models.Article.id == id).first()
     articles.events
     articles.launches
+    for e in articles.events:
+        del e.article_id
+    for e in articles.launches:
+        del e.article_id
     return articles
 
 
-
 def get_articles(db: Session, skip: int = 0, limit: int = 3):
-    articles =  db.query(models.Article).offset(skip).limit(limit).all()
+    articles = db.query(models.Article).offset(skip).limit(limit).all()
     for e in articles:
         e.events
         e.launches
-    
+
     return articles
 
 
@@ -50,9 +53,9 @@ def update_article(db: Session, db_article, article):
     db.refresh(db_article)
     return db_article
 
-def delete_article(db:Session, id:int):
+
+def delete_article(db: Session, id: int):
     db_article = db.query(models.Article).filter(models.Article.id == id).first()
     db.delete(db_article)
     db.commit()
     return {"detail": "Ok"}
-
