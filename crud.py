@@ -6,6 +6,9 @@ from sqlalchemy.orm import Session
 
 def get_article_by_id(db: Session, id: int):
     articles = db.query(models.Article).filter(models.Article.id == id).first()
+    if articles is None:
+        print(articles)
+        return None
     articles.events
     articles.launches
     for e in articles.events:
