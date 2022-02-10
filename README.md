@@ -1,6 +1,9 @@
-# BackEndChallengeSpaceFlight
+# BackEndChallengeSpaceFlight - Desafio challenge by coodesh
+
 Este repositório refere-se ao desafio back-end Python
-O desafio consiste em 7 tarefas, sendo 3 obrigatórias e 4 diferenciais. Listadas abaixo.
+Consiste  em 7 tarefas, sendo 3 obrigatórias e 4 diferenciais.
+Necessário adaptar o modelo de dados de acordo com o API Space Flight News.
+Listadas abaixo.
 
 Obrigatório  - C.R.U.D em articles - Concluído
 
