@@ -1,13 +1,15 @@
 FROM python:3.9.7
 
-COPY ./BackEndChallengeSpaceFlight /app/src
-COPY ./requirements.txt /app
 
-WORKDIR /app
 
-RUN pip3 install -r requirements.txt
+COPY ./src/requirements.txt /code/requirements.txt
+
+RUN pip3 install --no-cache-dir --upgrade -r /code/requirements.txt
+
+WORKDIR /code
+
+COPY src /code
 
 EXPOSE 8000
 
-CMD ["uvicorn", "BackEndChallengeSpaceFlight.main:app","--host=0.0.0.0","--reload"]
-
+CMD ["uvicorn", "main:app","--host=0.0.0.0","--reload"]

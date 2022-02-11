@@ -5,7 +5,7 @@ username = getpass.getuser()
 cron = CronTab(user=f'{username}')
 
 job = cron.new(
-    command=f"python3 /home/{username}/Documents/projetos/BackEndChallengeSpaceFlight/populate.py",
+    command=f"python3 /home/{username}/Documents/projetos/BackEndChallengeSpaceFlight/src/populate.py",
     comment="Esse CRON tem por objetivo sincronização das base de dados",
 )
 
