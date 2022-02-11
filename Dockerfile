@@ -1,6 +1,8 @@
 FROM python:3.9.7
 
+RUN apt-get update    
 
+RUN yes|apt-get install cron
 
 COPY ./src/requirements.txt /code/requirements.txt
 
