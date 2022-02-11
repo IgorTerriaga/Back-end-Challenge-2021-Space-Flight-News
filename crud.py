@@ -1,6 +1,5 @@
 import models, schemas
 from cmath import log
-from django.http import HttpResponse
 from sqlalchemy.orm import Session
 
 

@@ -1,19 +1,25 @@
 import smtplib
 import requests
-from decouple import config
+#from decouple import config
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 
-connect = config("STRING_CONNECTION")
+#connect = config("STRING_CONNECTION")
+connect = "postgresql+psycopg2://zyhfesfxpfxvbz:6318d82135697351e26637859cc30126bd6937367c892daad9fc008ac6af06ba@ec2-34-205-46-149.compute-1.amazonaws.com:5432/d7b7etm394h0d"
+
 engine = create_engine(connect)
 server = smtplib.SMTP_SSL("smtp.gmail.com", 465)
-server.login("igsantos1996@gmail.com", "tggkxdrauhvcguvp")
+server.login("testeigor1996@gmail.com", "nnjvschdmgonmsvb")
 Session = sessionmaker(bind=engine)
 session = Session()
 
+# password = config("PASSWORD")
+# email = config("EMAIL")
+
+
 url = "https://api.spaceflightnewsapi.net/v3/articles?_limit=50"
-msg = 'Ocorreu um erro ao sincronizar os dados dos articles.'
+msg = "Ocorreu um erro ao sincronizar os dados dos articles."
 payload = {}
 headers = {}
 
@@ -24,12 +30,12 @@ try:
         for post in response:
             id = post["id"]
             featured = post["featured"]
-            title = post["title"]
-            url = post["url"]
-            imageUrl = post["imageUrl"]
-            newsSite = post["newsSite"]
-            summary = post["summary"]
-            publishedAt = post["summary"]
+            title = post["title"].replace('‘', '"').replace('’', '"').replace('\'','"')
+            url = post["url"].replace('‘', '"').replace('’', '"').replace('\'','"')
+            imageUrl = post["imageUrl"].replace('‘', '"').replace('’', '"').replace('\'','"')
+            newsSite = post["newsSite"].replace('‘', '"').replace('’', '"').replace('\'','"')
+            summary = post["summary"].replace('‘', '"').replace('’', '"').replace('\'','"')
+            publishedAt = post["summary"].replace('‘', '"').replace('’', '"').replace('\'','"')
             events = post["events"]
             launches = post["launches"]
 
@@ -60,5 +66,9 @@ try:
     queryExecute(response)
 except Exception as e:
     print(e)
-    server.sendmail("igsantos1996@gmail.com", "wedsonteixeira14081998@gmail.com", "Subject: Sincronizacao do servidor\n{}".format(msg))
+    server.sendmail(
+        "testeigor1996@gmail.com",
+        "igsantos1996@gmail.com",
+        "Subject: Sincronizacao do servidor\n{}".format(msg),
+    )
     server.quit()
